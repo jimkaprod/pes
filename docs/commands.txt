@@ -1,0 +1,48 @@
+#Creation virtual environnement
+$python -m venv dashboard_venv
+#Activation virtual environnement
+$source dashboard_venv/bin/activate
+#Desactivation virtual environnement
+$deactivate
+#Installation flask
+$pip install flask
+#Installation des packages
+$pip install -r requirements/dev.txt
+#Declaration Variable Environnement App
+$export FLASK_APP=application.py
+$export FLASK_DEBUG=1
+#Exporter les packages dans un fichiers de type requirements.txt
+$pip freeze > requirements.txt
+#Lancer flask 
+$flask run
+#Creation des tables users et roles via flask shell
+$flask shell
+$from app.models import db
+$db.create_all()
+#Outils pour visualiser les tables sous ubuntu : sqlitestudio
+#Flask Migrate
+#creation de l'environnement
+$flask db init
+#preparation d'une mise à jour
+$flask db migrate -m "message"
+#mise a jour
+$flask db upgrade
+#Creeer un utilisateur avec flask shell
+$flask shell
+$u = User(email='jm@jimkaprod.com', username='gegen', password='toto')
+$db.session.add(u)
+$db.session.commit()
+#Creer les roles 
+$flask shell
+$Role.insert_roles()
+$Role.query.all()
+#Les variables d'environnement
+$export SECRET_KEY
+$export MAIL_SERVER
+$export MAIL_PORT
+$export MAIL_USE_TLS
+$export MAIL_USERNAME
+$export MAIL_PASSWORD
+$export DASHBOARD_ADMIN -> email admin
+
+

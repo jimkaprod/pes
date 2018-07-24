@@ -44,5 +44,6 @@ $export MAIL_USE_TLS
 $export MAIL_USERNAME
 $export MAIL_PASSWORD
 $export DASHBOARD_ADMIN -> email admin
-
+#Commande alembic erreur : Target database is not up to date
+$flask db stamp head
 

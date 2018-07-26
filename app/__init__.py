@@ -33,4 +33,7 @@ def create_app(config_name):
     from .users import users as users_blueprint
     app.register_blueprint(users_blueprint)
 
+    from .teams import teams as teams_blueprint
+    app.register_blueprint(teams_blueprint)
+
     return app

@@ -9,7 +9,10 @@ def index():
 
 @teams.route('/team/<int:id>', methods=['GET', 'POST'])
 def team(id):
+    print('toto')
     post = Teams.query.get_or_404(id)
+    return render_template('index.html', posts=[post])
+
     # form = TeamForm()
     # if form.validate_on_submit():
     #       comment = Comment(body=form.body.data,
@@ -22,4 +25,4 @@ def team(id):
 
 
     # return render_template('post.html', posts=[post], form=form, comments=comments, pagination=pagination)
-    return render_template('teams/index.html', posts=[post])
+

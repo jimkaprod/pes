@@ -34,6 +34,6 @@ def create_app(config_name):
     app.register_blueprint(users_blueprint)
 
     from .teams import teams as teams_blueprint
-    app.register_blueprint(teams_blueprint)
+    app.register_blueprint(teams_blueprint, url_prefix='/teams')
 
     return app

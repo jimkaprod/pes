@@ -3,21 +3,23 @@ from .. import db
 from .models import Teams
 from . import teams
 
-@teams.route('/', methods=['GET', 'POST'])
+@teams.route('/home', methods=['GET', 'POST'])
 def index():
-    print('ouizz')
-    return render_template('index.html')
-    # form = NameForm()
+    return render_template('teams/index.html')
+
+@teams.route('/team/<int:id>', methods=['GET', 'POST'])
+def team(id):
+    post = Teams.query.get_or_404(id)
+    # form = TeamForm()
     # if form.validate_on_submit():
-    #     user = User.query.filter_by(username=form.name.data).first()
-    #     if user is None:
-    #         user = User(username=form.name.data)
-    #         db.session.add(user)
-    #         session['known'] = False
-    #         if current_app.config['FLASKY_ADMIN']:
-    #             send_email(current_app.config['FLASKY_ADMIN'], 'New User',
-    #                        'mail/new_user', user=user)
-    #     else:
-    #         session['known'] = True
-    #     session['name'] = form.name.data
-    #     return redirect(url_for('.index'))
+    #       comment = Comment(body=form.body.data,
+    #                       post=post,
+    #                       author=current_user._get_current_object())
+    #       db.session.add(comment)
+    #       db.session.commit()
+    #       flash('Your comment has been published.')
+    #       return redirect(url_for('.post', id=post.id, page=-1))
+
+
+    # return render_template('post.html', posts=[post], form=form, comments=comments, pagination=pagination)
+    return render_template('teams/index.html', posts=[post])

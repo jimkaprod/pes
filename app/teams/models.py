@@ -2,9 +2,12 @@ from flask import current_app
 from .. import db
 
 class Teams(db.Model):
-  __tablename__ = 'teams'
-  # id = db.Column(db.Integer, primary_key=True)
-  # name = db.Column(db.String(64), unique=True)
+  __bind_key__ = 'users'
+  # __bind_key__ = 'mysql'
+  __tablename__ = 'game_teams'
+  game_team_id = db.Column(db.Integer, primary_key=True)
+  game_team_name = db.Column(db.String(64), unique=True)
+  game_team_game_name = db.Column(db.String(64), unique=True)
   # default = db.Column(db.Boolean, default=False, index=True)
   # permissions = db.Column(db.Integer)
   # users = db.relationship('User', backref='role', lazy='dynamic')

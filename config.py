@@ -9,9 +9,9 @@ class Config:
         ['true', 'on', '1']
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    DASHBOARD_MAIL_SUBJECT_PREFIX = '[LP Dashboard]'
-    DASHBOARD_MAIL_SENDER = 'LP Dashboard Admin <jmcordier@laprovence.com>'
-    DASHBOARD_ADMIN = os.environ.get('DASHBOARD_ADMIN')
+    PES_MAIL_SUBJECT_PREFIX = '[LP Dashboard]'
+    PES_MAIL_SENDER = 'LP Dashboard Admin <jmcordier@laprovence.com>'
+    PES_ADMIN = os.environ.get('PES_ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
@@ -22,10 +22,8 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     # SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'pes-dev.sqlite')
-    SQLALCHEMY_BINDS = {
-        'mysql':        os.environ.get('DEV_DATABASE_URL'),
-    }
+    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'pes-dev.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL')
 
 
 class TestingConfig(Config):

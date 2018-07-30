@@ -5,7 +5,7 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Hello world bijour!</h1>
+    <h1>Stats </h1>
     {% if current_user.is_authenticated %}
       {{ current_user}}
     {% else %}
@@ -15,32 +15,73 @@
 
 <form>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+    <label for="exampleFormControlSelect2">Zones</label>
+    <select multiple class="form-control" id="js-teams-zones">
+      {% for item in zones %}
+      <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+      {% endfor %}
     </select>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlSelect2">Example multiple select</label>
+
+    <label for="exampleFormControlSelect2">TeamsTypes</label>
+    <select multiple class="form-control" id="js-teams-teams-types">
+      {% for item in teamsTypes %}
+      <option data-id="{{ item.id }}" data-type="{{ item.type }}">{{ item.id }} : {{ item.type }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="exampleFormControlSelect2">Seasons</label>
+    <select multiple class="form-control" id="js-teams-seasons">
+      {% for item in seasons %}
+      <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="exampleFormControlSelect2">Countries</label>
+    <select multiple class="form-control" id="js-teams-countries">
+      {% for item in countries %}
+      <option data-id="{{item.id}}" data-name="{{item.name}}" data-abbreviation="{{item.abbreviation}}" data-zone_id="{{item.zones_id}}">{{ item.id }} : {{ item.name }} : {{ item.abbreviation }} : {{ item.zones_id }}</option>
+      {% endfor %}
+
+    </select>
+
+    <label for="exampleFormControlSelect2">Teams</label>
+    <select multiple class="form-control" id="js-teams-teams">
+      {% for item in teams %}
+      <option data-id="{{ item.id }}" data-game_name="{{ item.game_name }}" data-real_name="{{ item.real_name }}" data-abbreviation="{{ item.abbreviation }}" data-teams_type_id="{{ item.teams_types_id }}" data-countries_id="{{ item.countries_id }}" data-zones_id="{{ item.zones_id }}">{{ item.id }} : {{ item.game_name }} : {{ item.real_name }} : {{ item.abbreviation }} : {{ item.teams_types_id }} : {{ item.countries_id }} : {{ item.zones_id }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="exampleFormControlSelect2">Competitions</label>
+    <select multiple class="form-control" id="js-teams-competitions">
+      {% for item in competitions %}
+      <option data-id = "{{ item.id }}" data-game_name = "{{ item.game_name }}" data-real_name = "{{ item.real_name }}" data-teams_types_id = "{{ item.teams_types_id }}" data-competitions_types_id = "{{ item.competitions_types_id }}" data-competitions_categories_id = "{{ item.competitions_categories_id }}" data-countries_id = "{{ item.countries_id }}" data-zones_id = "{{ item.zones_id }}">{{ item.id }} : {{ item.game_name }} : {{ item.real_name }} : {{ item.teams_types_id }} : {{ item.competitions_types_id }} : {{ item.competitions_categories_id }} : {{ item.countries_id }} : {{ item.zones_id }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="exampleFormControlSelect2">CompetitionsCategories</label>
+    <select multiple class="form-control" id="js-teams-competitions-categories">
+      {% for item in competitionsCategories %}
+      <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="exampleFormControlSelect2">CompetitionsSeasons</label>
+    <select multiple class="form-control" id="js-teams-competitions-seasons">
+      {% for item in competitionsSeasons %}
+      <option data-id="{{ item.id }}" data-seasons_id="{{ item.seasons_id }} data-competitions_id="{{ item.competitions_id }}">{{ item.id }} : {{ item.seasons_id }} : {{ item.competitions_id }}</option>
+      {% endfor %}
+    </select>
+
+
+
+
+    <label for="exampleFormControlSelect2">Zones</label>
     <select multiple class="form-control" id="exampleFormControlSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+      {% for zone in zones %}
+        <option>{{ zone.id }} : {{ zone.name }}</option>
+      {% endfor %}
     </select>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
   </div>
 </form>
 

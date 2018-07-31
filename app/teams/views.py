@@ -1,6 +1,6 @@
 from flask import render_template, session, redirect, url_for, current_app
 from .. import db
-from .models import Teams, Zones, TeamsTypes, Countries, Competitions, CompetitionsSeasons, CompetitionsTypes, CompetitionsCategories, Seasons
+from .models import Teams, Zones, TeamsTypes, Countries, Competitions, CompetitionsTypes, CompetitionsCategories, Seasons
 from . import teams
 
 @teams.route('/home', methods=['GET', 'POST'])
@@ -19,14 +19,14 @@ def index():
     #     print(country.id, country.name, country.abbreviation, country.zones_id)
 
     teams = Teams.query.order_by(Teams.id).all()
-    for team in teams:
-        print(team.id, team.game_name, team.real_name, team.abbreviation, team.teams_types_id, team.countries_id, team.zones_id)
+    # for team in teams:
+    #     print(team.id, team.game_name, team.real_name, team.abbreviation, team.teams_types_id, team.countries_id, team.zones_id)
 
     competitions = Competitions.query.order_by(Competitions.id).all()
     # for competition in competitions:
     #     print(competition.id, competition.game_name, competition.real_name, competition.teams_types_id, competition.competitions_types_id, competition.competitions_categories_id, competition.countries_id, competition.zones_id)
 
-    competitionsSeasons = CompetitionsSeasons.query.order_by(CompetitionsSeasons.id).all()
+    # competitionsSeasons = CompetitionsSeasons.query.order_by(CompetitionsSeasons.id).all()
     # for competition in competitionsSeasons:
     #     print(competition.id, competition.seasons_id, competition.competitions_id)
 
@@ -35,10 +35,29 @@ def index():
     #     print(competition.id, competition.name)
 
     seasons = Seasons.query.order_by(Seasons.id).all()
-    # for season in seasons:
-    #     print(season.id, season.name)
+    for season in seasons:
+        print(season.id, season.name)
 
+    # userList = users.query.join(friendships, users.id==friendships.user_id).add_columns(users.userId, users.name, users.email, friends.userId, friendId).filter(users.id == friendships.friend_id).filter(friendships.user_id == userID).paginate(page, 1, False)
+    # userList = CompetitionsTypes.query.join(friendships, users.id==friendships.user_id).add_columns(users.userId, users.name, users.email, friends.userId, friendId).filter(users.id == friendships.friend_id).filter(friendships.user_id == userID).paginate(page, 1, False)
 
+    q1 = CompetitionsTypes.query.join(Competitions, CompetitionsTypes.id==Competitions.competitions_types_id) \
+    .filter(CompetitionsTypes.name == 'championship') \
+    .all()
+
+    q2 = Competitions.query.join(CompetitionsTypes, CompetitionsTypes.id==Competitions.competitions_types_id) \
+    .filter(CompetitionsTypes.name == 'championship') \
+    .all()
+
+    print('### Q1:')
+    for item in q1:
+        print(item.name)
+    print('')
+
+    print('### Q2:')
+    for item in q2:
+        print(item.game_name,item.real_name)
+    print('')
 
     return render_template('teams/index.html',
         zones=zones,
@@ -46,7 +65,7 @@ def index():
         countries = countries,
         teams = teams,
         competitions = competitions,
-        competitionsSeasons = competitionsSeasons,
+        # competitionsSeasons = competitionsSeasons,
         competitionsCategories = competitionsCategories,
         seasons = seasons
     )

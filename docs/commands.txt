@@ -11,9 +11,10 @@ $pip install -r requirements/dev.txt
 #Declaration Variable Environnement App
 $export FLASK_APP=application.py
 $export FLASK_DEBUG=1
+$export DEV_DATABASE_URL=mysql://admin:FLrtMcYM1973@localhost/pes_dev
 #Exporter les packages dans un fichiers de type requirements.txt
 $pip freeze > requirements.txt
-#Lancer flask 
+#Lancer flask
 $flask run
 #Creation des tables users et roles via flask shell
 $flask shell
@@ -32,7 +33,7 @@ $flask shell
 $u = User(email='jm@jimkaprod.com', username='gegen', password='toto')
 $db.session.add(u)
 $db.session.commit()
-#Creer les roles 
+#Creer les roles
 $flask shell
 $Role.insert_roles()
 $Role.query.all()

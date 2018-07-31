@@ -65,15 +65,12 @@
       {% endfor %}
     </select>
 
-    <label for="exampleFormControlSelect2">CompetitionsSeasons</label>
+<!--     <label for="exampleFormControlSelect2">CompetitionsSeasons</label>
     <select multiple class="form-control" id="js-teams-competitions-seasons">
       {% for item in competitionsSeasons %}
       <option data-id="{{ item.id }}" data-seasons_id="{{ item.seasons_id }} data-competitions_id="{{ item.competitions_id }}">{{ item.id }} : {{ item.seasons_id }} : {{ item.competitions_id }}</option>
       {% endfor %}
-    </select>
-
-
-
+    </select> -->
 
     <label for="exampleFormControlSelect2">Zones</label>
     <select multiple class="form-control" id="exampleFormControlSelect2">
@@ -85,6 +82,7 @@
   </div>
 </form>
 
-
+<script type="text/javascript" src="{{ url_for('static', filename='js/handlebars.min-latest.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('teams.static', filename='js/teams.js') }}"></script>
 
 {% endblock %}

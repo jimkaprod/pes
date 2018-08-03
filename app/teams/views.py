@@ -1,52 +1,52 @@
 from flask import render_template, session, redirect, url_for, current_app, jsonify, json, request
 from .. import db
-from .models import Teams, Zones, TeamsTypes, Countries, Competitions, CompetitionsTypes, CompetitionsCategories, Seasons
+from .models import TeamsNames, TeamsTypes
 from . import teams
 
 @teams.route('/home', methods=['GET', 'POST'])
 def index():
 
-    competitions = {}
-    competitionsList = Competitions.query.order_by(Competitions.id).all()
-    competitions['list'] = competitionsList
-    competitions['model'] = 'Competitions'
+    # competitions = {}
+    # competitionsList = Competitions.query.order_by(Competitions.id).all()
+    # competitions['list'] = competitionsList
+    # competitions['model'] = 'Competitions'
     # for competition in competitionsList:
     #     print(competition.id, competition.game_name, competition.real_name, competition.teams_types_id, competition.competitions_types_id, competition.competitions_categories_id, competition.countries_id, competition.zones_id)
 
 
-    competitionsTypes = {}
-    competitionsTypesList = CompetitionsTypes.query.order_by(CompetitionsTypes.id).all()
-    competitionsTypes['list'] = competitionsTypesList
-    competitionsTypes['model'] = 'CompetitionsTypes'
+    # competitionsTypes = {}
+    # competitionsTypesList = CompetitionsTypes.query.order_by(CompetitionsTypes.id).all()
+    # competitionsTypes['list'] = competitionsTypesList
+    # competitionsTypes['model'] = 'CompetitionsTypes'
     # for competitionTypes in competitionsTypes:
     #     print(competitionTypes.id, competitionTypes.name)
 
-    competitionsCategories = {}
-    competitionsCategoriesList = CompetitionsCategories.query.order_by(CompetitionsCategories.id).all()
-    competitionsCategories['list'] = competitionsCategoriesList
-    competitionsCategories['model'] = 'CompetitionsCategories'
+    # competitionsCategories = {}
+    # competitionsCategoriesList = CompetitionsCategories.query.order_by(CompetitionsCategories.id).all()
+    # competitionsCategories['list'] = competitionsCategoriesList
+    # competitionsCategories['model'] = 'CompetitionsCategories'
     # for competition in competitionsCategories:
     #     print(competition.id, competition.name)
 
 
-    seasons = {}
-    seasonsList = Seasons.query.order_by(Seasons.id).all()
-    seasons['list'] = seasonsList
-    seasons['model'] = 'Seasons'
+    # seasons = {}
+    # seasonsList = Seasons.query.order_by(Seasons.id).all()
+    # seasons['list'] = seasonsList
+    # seasons['model'] = 'Seasons'
     # for season in seasons:
     #     print(season.id, season.name)
 
-    zones = {}
-    zonesList = Zones.query.order_by(Zones.id).all()
-    zones['list'] = zonesList
-    zones['model'] = 'Zones'
+    # zones = {}
+    # zonesList = Zones.query.order_by(Zones.id).all()
+    # zones['list'] = zonesList
+    # zones['model'] = 'Zones'
     # for zone in zones:
     #     print(zone.id, zone.name)
 
-    countries = {}
-    countriesList = Countries.query.order_by(Countries.id).all()
-    countries['list'] = countriesList
-    countries['model'] = 'Countries'
+    # countries = {}
+    # countriesList = Countries.query.order_by(Countries.id).all()
+    # countries['list'] = countriesList
+    # countries['model'] = 'Countries'
 
     # for country in countries:
     #     print(country.id, country.name, country.abbreviation, country.zones_id)
@@ -58,10 +58,10 @@ def index():
     # for teamType in teamsTypes:
     #     print(teamType.id, teamType.type)
 
-    teams = {}
-    teamsList = Teams.query.order_by(Teams.id).all()
-    teams['list'] = teamsList
-    teams['model'] = 'Teams'
+    teamsNames = {}
+    teamsNamesList = TeamsNames.query.order_by(TeamsNames.id).all()
+    teamsNames['list'] = teamsNamesList
+    teamsNames['model'] = 'Teams'
     # for team in teams:
     #     print(team.id, team.game_name, team.real_name, team.abbreviation, team.teams_types_id, team.countries_id, team.zones_id)
 
@@ -74,15 +74,15 @@ def index():
 
 
     return render_template('teams/index.html',
-        zones=zones,
+        # zones=zones,
         teamsTypes = teamsTypes,
-        countries = countries,
-        teams = teams,
-        competitions = competitions,
-        # competitionsSeasons = competitionsSeasons,
-        competitionsCategories = competitionsCategories,
-        seasons = seasons,
-        competitionsTypes = competitionsTypes
+        # countries = countries,
+        teams = teamsNames
+        # competitions = competitions,
+        # # competitionsSeasons = competitionsSeasons,
+        # competitionsCategories = competitionsCategories,
+        # seasons = seasons,
+        # competitionsTypes = competitionsTypes
     )
 
 

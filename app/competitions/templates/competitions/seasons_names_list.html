@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flasky - Edit Profile{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>List Seasons</h1>
+</div>
+
+{% for item in seasonsNamesList %}
+<a href="{{ url_for('.seasons_names_edit', id=item.id) }}">{{ item.name }}
+    <span class="label label-primary">Edit</span>
+</a>
+{% endfor %}
+
+
+{% endblock %}

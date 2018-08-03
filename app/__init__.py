@@ -36,4 +36,7 @@ def create_app(config_name):
     from .teams import teams as teams_blueprint
     app.register_blueprint(teams_blueprint, url_prefix='/teams')
 
+    from .competitions import competitions as competitions_blueprint
+    app.register_blueprint(competitions_blueprint, url_prefix='/competitions')
+
     return app

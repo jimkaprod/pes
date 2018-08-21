@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flasky - Edit Profile{% endblock %}
+
+{% block page_content %}
+{% include "data/navbar.html" %}
+<div class="page-header">
+    <h1>List Competitions Names</h1>
+</div>
+<a href="{{ url_for('.competitions_names_add') }}"><span class="label label-primary">Add</span></a>
+<ul class="list-group">
+{% for item in list %}
+  <li class="list-group-item">
+    <a href="{{ url_for('.competitions_names_edit', id=item.id) }}">{{ item.name }}
+        <span class="label label-primary">Edit</span>
+    </a>
+    <a href="{{ url_for('.competitions_names_delete', id=item.id) }}" class="delete-item">
+        <span class="label label-primary">Delete</span>
+    </a>
+  </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

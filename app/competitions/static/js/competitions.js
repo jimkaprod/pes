@@ -43,7 +43,8 @@ function dataRequest()
 {
   var request = getXdr();
   // var queryString = Object.keys(json).map(key => key + '=' + json[key]).join('&');
-  request.open('POST', '/teams/teams/filters');
+  request.open('POST', '/competitions/teams/filters');
+  console.log(dataFilters)
   jsonData = JSON.stringify(dataFilters);
   console.log(jsonData )
   request.responseType = "json";
@@ -93,30 +94,36 @@ function translate() {
 }
 
 teamsFilters={}
-// teamsFilters["js-teams-competitions"] = {};
-// teamsFilters["js-teams-competitions"]['id'] = -1;
-// teamsFilters["js-teams-competitions"]['model'] = "Competitions";
-// teamsFilters["js-teams-competitions-types"] = {};
-// teamsFilters["js-teams-competitions-types"]['id'] = -1;
-// teamsFilters["js-teams-competitions-types"]['model'] = "CompetitionsTypes";
-// teamsFilters["js-teams-competitions-categories"] = {};
-// teamsFilters["js-teams-competitions-categories"]['id'] = -1;
-// teamsFilters["js-teams-competitions-categories"]['model'] = "CompetitionsCategories";
-// teamsFilters["js-teams-seasons"] = {};
-// teamsFilters["js-teams-seasons"]['id'] = -1;
-// teamsFilters["js-teams-seasons"]['model'] = "Seasons";
-// teamsFilters["js-teams-zones"] = {};
-// teamsFilters["js-teams-zones"]['id'] = -1;
-// teamsFilters["js-teams-zones"]['model'] = "Zones";
-// teamsFilters["js-teams-countries"] = {};
-// teamsFilters["js-teams-countries"]['id'] = -1;
-// teamsFilters["js-teams-countries"]['model'] = "Countries";
-teamsFilters["js-teams-teams-types"] = {};
-teamsFilters["js-teams-teams-types"]['id'] = -1;
-teamsFilters["js-teams-teams-types"]['model'] = "TeamsTypes";
-teamsFilters["js-teams-teams"] = {};
-teamsFilters["js-teams-teams"]['id'] = -1;
-teamsFilters["js-teams-teams"]['model'] = "Teams";
+teamsFilters["js-select-videos-games-names"] = {};
+teamsFilters["js-select-videos-games-names"]['id'] = -1;
+teamsFilters["js-select-videos-games-names"]['model'] = "VideosGamesNames";
+teamsFilters["js-select-seasons-names"] = {};
+teamsFilters["js-select-seasons-names"]['id'] = -1;
+teamsFilters["js-select-seasons-names"]['model'] = "SeasonsNames";
+teamsFilters["js-select-zones-names"] = {};
+teamsFilters["js-select-zones-names"]['id'] = -1;
+teamsFilters["js-select-zones-names"]['model'] = "ZonesNames";
+teamsFilters["js-select-countries-names"] = {};
+teamsFilters["js-select-countries-names"]['id'] = -1;
+teamsFilters["js-select-countries-names"]['model'] = "CountriesNames";
+teamsFilters["js-select-competitions-names"] = {};
+teamsFilters["js-select-competitions-names"]['id'] = -1;
+teamsFilters["js-select-competitions-names"]['model'] = "CompetitionsNames";
+teamsFilters["js-select-competitions-types"] = {};
+teamsFilters["js-select-competitions-types"]['id'] = -1;
+teamsFilters["js-select-competitions-types"]['model'] = "CompetitionsTypes";
+teamsFilters["js-select-competitions-categories"] = {};
+teamsFilters["js-select-competitions-categories"]['id'] = -1;
+teamsFilters["js-select-competitions-categories"]['model'] = "CompetitionsCategories";
+teamsFilters["js-select-teams-names"] = {};
+teamsFilters["js-select-teams-names"]['id'] = -1;
+teamsFilters["js-select-teams-names"]['model'] = "TeamsNames";
+teamsFilters["js-select-teams-types"] = {};
+teamsFilters["js-select-teams-types"]['id'] = -1;
+teamsFilters["js-select-teams-types"]['model'] = "TeamsTypes";
+teamsFilters["js-select-teams-levels"] = {};
+teamsFilters["js-select-teams-levels"]['id'] = -1;
+teamsFilters["js-select-teams-levels"]['model'] = "TeamsLevels";
 
 
 dataFilters={}
@@ -143,31 +150,83 @@ document.dispatchEvent(event);
 
 
 var eCompetitionsFiltersChange = new Event('onCompetitionsFiltersChange');
+var eCompetitionsFiltersClick = new Event('onCompetitionsFiltersClick');
 
 document.addEventListener("DOMContentLoaded", function(e) {
-  var loop = Object.keys(teamsFilters).length;
+  var deleteLinks = document.querySelectorAll('[class^="delete-item"]');
+  console.log('YO',deleteLinks)
+  for (var i = 0; i < deleteLinks.length; i++) {
+    console.log(deleteLinks[i])
+    deleteLinks[i].addEventListener('click', function(event) {
+      event.preventDefault();
 
-  console.log('------------------------------')
-  console.log(teamsFilters)
-  console.log('------------------------------')
-  for (var k in teamsFilters) {
-    select = document.getElementById(k);
-    console.log('----->>', k, teamsFilters[k]['model'], teamsFilters[k]['id'])
-    dataFilters[ teamsFilters[k]['model']] =  teamsFilters[k]['id']
-    // select.onchange=changeEventHandler;
-    console.log(dataFilters)
-    select.addEventListener('change', function(e) {
-      res = changeEventHandler(e);
-      // eCompetitionsFiltersChange.data = teamsFilters
-      document.dispatchEvent(eCompetitionsFiltersChange);
-    }, false);
+      var choice = confirm("Are you sure to delete this item?");
+
+      if (choice) {
+        window.location.href = this.getAttribute('href');
+      }
+    });
   }
+
+
+
+
+
+  buttons = document.querySelectorAll('[id^="js-select-"]');
+  [].forEach.call(buttons, function(a) {
+    // do whatever
+    a.addEventListener('click', function(e) {
+      console.log(e)
+      res = clickEventHandler(e);
+      eCompetitionsFiltersClick.data = teamsFilters
+      document.dispatchEvent(eCompetitionsFiltersClick);
+    }, false);
+  });
+  // for (var k in buttons) {
+  //   console.log(k)
+  // }
+
+  // var loop = Object.keys(teamsFilters).length;
+
+  // console.log('------------------------------')
+  // console.log(teamsFilters)
+  // console.log('------------------------------')
+  // for (var k in teamsFilters) {
+  //   select = document.getElementById(k);
+  //   // console.log('----->>', k, teamsFilters[k]['model'], teamsFilters[k]['id'])
+  //   dataFilters[ teamsFilters[k]['model']] =  teamsFilters[k]['id']
+  //   // select.onchange=changeEventHandler;
+  //   // console.log(dataFilters)
+  //   // console.log(select)
+  //   select.addEventListener('change', function(e) {
+  //     res = changeEventHandler(e);
+  //     // eCompetitionsFiltersChange.data = teamsFilters
+  //     document.dispatchEvent(eCompetitionsFiltersChange);
+  //   }, false);
+  // }
 });
 
-document.addEventListener("onCompetitionsFiltersChange", function(e) {
+document.addEventListener("onCompetitionsFiltersClick", function(e) {
   dataRequest()
 });
+// document.addEventListener("onCompetitionsFiltersChange", function(e) {
+//   dataRequest()
+// });
 
+
+function clickEventHandler(e) {
+  var target = e.currentTarget;
+  var dataset = target.dataset;console.log(dataset)
+  var model = target.dataset['model']
+  var res = {}
+  res['model'] = model
+  for (var k in dataset){
+    if (typeof dataset[k] !== 'function' && k == 'id') {
+      dataFilters[model] =  parseInt(dataset[k])
+      break
+    }
+  }
+}
 
 function changeEventHandler(e) {
   var target = e.currentTarget;
@@ -182,5 +241,4 @@ function changeEventHandler(e) {
     }
   }
 }
-
 

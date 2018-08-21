@@ -14,64 +14,178 @@
 </div>
 
 <form>
-  <div class="form-group">
-    <label for="exampleFormControlSelect2">Competitions</label>
-    <select multiple class="form-control" id="js-teams-competitions" data-model="{{ competitions['model'] }}">
-      {% for item in competitions['list'] %}
-      <option data-id = "{{ item.id }}" data-game_name = "{{ item.game_name }}" data-real_name = "{{ item.real_name }}" data-teams_types_id = "{{ item.teams_types_id }}" data-competitions_types_id = "{{ item.competitions_types_id }}" data-competitions_categories_id = "{{ item.competitions_categories_id }}" data-countries_id = "{{ item.countries_id }}" data-zones_id = "{{ item.zones_id }}">{{ item.id }} : {{ item.game_name }} : {{ item.real_name }} : {{ item.teams_types_id }} : {{ item.competitions_types_id }} : {{ item.competitions_categories_id }} : {{ item.countries_id }} : {{ item.zones_id }}</option>
-      {% endfor %}
-    </select>
+  <div class="container-fluid">
+<!--
+    <div class="row">
+      <div class="col-md-3">
+        <label>VideosGames</label>
+        {% for item in videosGamesNames['list'] %}
+          {% set id = 'js-select-videos-games-names-' + loop.index|string() %}
+          <a href="#" id="{{ id }}"  data-id="{{ item.id }}" data-name="{{ item.name }}" data-model="{{ videosGamesNames['model'] }}" class="list-group-item">{{ item.id }} : {{ item.name }}</a>
+        {% endfor %}
+        <label>Seasons</label>
+        {% for item in seasonsNames['list'] %}
+          {% set id = 'js-select-seasons-names-' + loop.index|string() %}
+            <a href="#" id="{{ id }}"  data-id="{{ item.id }}" data-name="{{ item.name }}" data-model="{{ seasonsNames['model'] }}" class="list-group-item">{{ item.id }} : {{ item.name }}</a>
+          {% endfor %}
+      </div>
+      <div class="col-md-3">
+        <label>Competitions Types</label>
+        {% for item in competitionsTypes['list'] %}
+          {% set id = 'js-select-competitions-types-' + loop.index|string() %}
+            <a href="#" data-id = "{{ item.id }}" data-game_name = "{{ item.name }}" data-model="{{ competitionsTypes['model'] }}" class="list-group-item">{{ item.id }} : {{ item.name }}</a>
+        {% endfor %}
+        <label>TeamsTypes</label>
+        {% for item in teamsTypes['list'] %}
+          {% set id = 'js-select-teams-types-' + loop.index|string() %}
+            <a href="#" data-id="{{ item.id }}" data-type="{{ item.type }}" data-model="{{ teamsTypes['model'] }}" class="list-group-item">{{ item.id }} : {{ item.type }}</a>
+        {% endfor %}
+      </div>
+      <div class="col-md-3">
+        <label>CompetitionsCategories</label>
+        {% for item in competitionsCategories['list'] %}
+          {% set id = 'js-select-competitions-categories-' + loop.index|string() %}
+            <a href="#" data-id = "{{ item.id }}" data-name = "{{ item.name }}" data-model="{{ competitionsCategories['model'] }}" class="list-group-item">{{ item.id }} : {{ item.name }}</a>
+        {% endfor %}
+        <label>TeamsLevels</label>
+        {% for item in teamsLevels['list'] %}
+          {% set id = 'js-select-teams-levels-' + loop.index|string() %}
+            <a href="#" data-id="{{ item.id }}" data-level="{{ item.level }}" data-model="{{ teamsLevels['model'] }}" class="list-group-item">{{ item.id }} : {{ item.level }}</a>
+        {% endfor %}
+      </div>
+      <div class="col-md-3">
+        <label>Competitions Names</label>
+        <div class="list-group list-group-flush" style="height:200px;overflow-y: auto;">
+          {% for item in competitionsNames['list'] %}
+            {% set id = 'js-select-competitions-names-' + loop.index|string() %}
+              <a href="#" data-id = "{{ item.id }}" data-game_name = "{{ item.name }}" data-model="{{ competitionsNames['model'] }}" class="list-group-item">{{ item.id }} : {{ item.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label>Countries</label>
+        {% for item in countriesNames['list'] %}
+          {% set id = 'js-select-countries-names-' + loop.index|string() %}
+          <a href="#" id="{{ id }}"  data-id="{{ item.id }}" data-name="{{ item.name }}" data-model="{{ countriesNames['model'] }}" class="list-group-item">{{ item.id }} : {{ item.name }}</a>
+        {% endfor %}
+      </div>
 
-    <label for="exampleFormControlSelect2">Competitions Types</label>
-    <select multiple class="form-control" id="js-teams-competitions-types" data-model="{{ competitionsTypes['model'] }}">
-      {% for item in competitionsTypes['list'] %}
-      <option data-id = "{{ item.id }}" data-game_name = "{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
-      {% endfor %}
-    </select>
+      <div class="col-md-3">
+        <label>Zones</label>
+        {% for item in zonesNames['list'] %}
+          {% set id = 'js-select-zones-names-' + loop.index|string() %}
+          <a href="#" id="{{ id }}"  data-id="{{ item.id }}" data-name="{{ item.name }}" data-model="{{ zonesNames['model'] }}" class="list-group-item">{{ item.id }} : {{ item.name }}</a>
+        {% endfor %}
+      </div>
 
-    <label for="exampleFormControlSelect2">CompetitionsCategories</label>
-    <select multiple class="form-control" id="js-teams-competitions-categories" data-model="{{ competitionsCategories['model'] }}">
-      {% for item in competitionsCategories['list'] %}
-      <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
-      {% endfor %}
-    </select>
+      <div class="col-md-3">
+        <label>Teams</label>
+        {% for item in teamsNames['list'] %}
+          {% set id = 'js-select-teams-names-' + loop.index|string() %}
+          <a href="#" id="{{ id }}"  data-id="{{ item.id }}" data-real_name="{{ item.real_name }}" data-model="{{ teamsNames['model'] }}" class="list-group-item">{{ item.id }} : {{ item.real_name }}</a>
+        {% endfor %}
+      </div>
 
+ -->
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect2">VideosGames</label>
+        <select multiple class="form-control" id="js-videos-games-names" data-model="{{ videosGamesNames['model'] }}">
+          {% for item in videosGamesNames['list'] %}
+            <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+          {% endfor %}
+        </select>
+        <label for="exampleFormControlSelect2">Seasons</label>
+        <select multiple class="form-control" id="js-seasons-names" data-model="{{ seasonsNames['model'] }}">
+          {% for item in seasonsNames['list'] %}
+            <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect2">Competitions Types</label>
+        <select multiple class="form-control" id="js-competitions-types" data-model="{{ competitionsTypes['model'] }}">
+          {% for item in competitionsTypes['list'] %}
+            <option data-id = "{{ item.id }}" data-game_name = "{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+          {% endfor %}
+        </select>
+        <label for="exampleFormControlSelect2">TeamsTypes</label>
+        <select multiple class="form-control" id="js-teams-types" data-model="{{ teamsTypes['model'] }}">
+          {% for item in teamsTypes['list'] %}
+            <option data-id="{{ item.id }}" data-type="{{ item.type }}">{{ item.id }} : {{ item.type }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect2">CompetitionsCategories</label>
+        <select multiple class="form-control" id="js-competitions-categories" data-model="{{ competitionsCategories['model'] }}">
+          {% for item in competitionsCategories['list'] %}
+            <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+          {% endfor %}
+        </select>
+        <label for="exampleFormControlSelect2">TeamsLevels</label>
+        <select multiple class="form-control" id="js-teams-levels" data-model="{{ teamsLevels['model'] }}">
+          {% for item in teamsLevels['list'] %}
+            <option data-id="{{ item.id }}" data-type="{{ item.level }}">{{ item.id }} : {{ item.level }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect2">Competitions Names</label>
+        <select multiple size="10" class="form-control" id="js-competitions-names" data-model="{{ competitionsNames['model'] }}">
+          {% for item in competitionsNames['list'] %}
+            <option data-id = "{{ item.id }}" data-name = "{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+          {% endfor %}
+        </select>
 
-   <label for="exampleFormControlSelect2">Seasons</label>
-    <select multiple class="form-control" id="js-teams-seasons" data-model="{{ seasons['model'] }}">
-      {% for item in seasons['list'] %}
-      <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
-      {% endfor %}
-    </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect2">Countries</label>
+        <select multiple size="20" class="form-control" id="js-countries-names" data-model="{{ countriesNames['model'] }}">
+          {% for item in countriesNames['list'] %}
+            <option data-id="{{item.id}}" data-name="{{item.name}}" data-abbreviation="{{item.abbreviation}}">{{ item.id }} : {{ item.name }} : {{ item.abbreviation }}</option>
+          {% endfor %}
+        </select>
+      </div>
 
-    <label for="exampleFormControlSelect2">Zones</label>
-    <select multiple class="form-control" id="js-teams-zones" data-model="{{ zones['model'] }}">
-      {% for zone in zones['list'] %}
-      <option>{{ zone.id }} : {{ zone.name }}</option>
-      {% endfor %}
-    </select>
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect2">Zones</label>
+        <select multiple size="15" class="form-control" id="js-zones-names" data-model="{{ zonesNames['model'] }}">
+          {% for item in zonesNames['list'] %}
+            <option data-id="{{item.id}}" data-name="{{item.name}}">{{ item.id }} : {{ item.name }}</option>
+          {% endfor %}
+        </select>
 
-    <label for="exampleFormControlSelect2">Countries</label>
-    <select mult iple class="form-control" id="js-teams-countries" data-model="{{ countries['model'] }}">
-      {% for item in countries['list'] %}
-      <option data-id="{{item.id}}" data-name="{{item.name}}" data-abbreviation="{{item.abbreviation}}" data-zone_id="{{item.zones_id}}">{{ item.id }} : {{ item.name }} : {{ item.abbreviation }} : {{ item.zones_id }}</option>
-      {% endfor %}
-    </select>
+      </div>
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect2">Teams</label>
+        <select multiple size="20" class="form-control" id="js-teams-names" data-model="{{ teamsNames['model'] }}">
+          {% for item in teamsNames['list'] %}
+            <option data-id="{{ item.id }}" data-real_name="{{ item.real_name }}" data-fifa_name="{{ item.fifa_name }}" data-pes_name="{{ item.pes_name }}">{{ item.id }} : {{ item.real_name }} : {{ item.fifa_name }} : {{ item.pes_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
 
-    <label for="exampleFormControlSelect2">TeamsTypes</label>
-    <select multiple class="form-control" id="js-teams-teams-types" data-model="{{ teamsTypes['model'] }}">
-      {% for item in teamsTypes['list'] %}
-      <option data-id="{{ item.id }}" data-type="{{ item.type }}">{{ item.id }} : {{ item.type }}</option>
-      {% endfor %}
-    </select>
+      </div>
+      <div class="col-md-3">
 
-    <label for="exampleFormControlSelect2">Teams</label>
-    <select multiple class="form-control" id="js-teams-teams" data-model="{{ teams['model'] }}">
-      {% for item in teams['list'] %}
-      <option data-id="{{ item.id }}" data-game_name="{{ item.game_name }}" data-real_name="{{ item.real_name }}" data-abbreviation="{{ item.abbreviation }}" data-teams_type_id="{{ item.teams_types_id }}" data-countries_id="{{ item.countries_id }}" data-zones_id="{{ item.zones_id }}">{{ item.id }} : {{ item.game_name }} : {{ item.real_name }} : {{ item.abbreviation }} : {{ item.teams_types_id }} : {{ item.countries_id }} : {{ item.zones_id }}</option>
-      {% endfor %}
-    </select>
-  </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
+</div>
 </form>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/handlebars.min-latest.js') }}"></script>

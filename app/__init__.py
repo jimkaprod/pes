@@ -55,4 +55,7 @@ def create_app(config_name):
     from .data import data as data_blueprint
     app.register_blueprint(data_blueprint, url_prefix='/data')
 
+    from .filters import filters as filters_blueprint
+    app.register_blueprint(filters_blueprint, url_prefix='/filters')
+
     return app

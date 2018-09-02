@@ -1,8 +1,8 @@
-"""empty message
+"""creation
 
-Revision ID: 7615287f956f
-Revises: c770629e2926
-Create Date: 2018-08-21 18:56:14.261637
+Revision ID: d0aaa377ff27
+Revises: 
+Create Date: 2018-08-21 21:05:40.640917
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7615287f956f'
-down_revision = 'c770629e2926'
+revision = 'd0aaa377ff27'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -21,26 +21,22 @@ def upgrade():
     op.create_table('competitions_categories',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
-    sa.ForeignKeyConstraint(['competitions_competitions_categories_id'], ['competitions.competitions_categories_id'], nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('competitions_names',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
-    sa.ForeignKeyConstraint(['competitions_competitions_names_id'], ['competitions.competitions_names_id'], nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('competitions_types',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
-    sa.ForeignKeyConstraint(['competitions_competitions_types_id'], ['competitions.competitions_types_id'], nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('countries_names',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
     sa.Column('abbreviation', sa.String(length=3), nullable=True),
-    sa.ForeignKeyConstraint(['competition_countries_names_id'], ['competitions.countries_names_id'], nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('abbreviation'),
     sa.UniqueConstraint('name')
@@ -57,14 +53,11 @@ def upgrade():
     op.create_table('seasons_names',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
-    sa.ForeignKeyConstraint(['competition_seasons_names_id'], ['competitions.seasons_names_id'], nullable=False),
-
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('teams_levels',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('level', sa.Float(), nullable=True),
-     sa.ForeignKeyConstraint(['competitions_teams_levels_id'], ['competitions.teams_levels_id'], nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('level')
     )
@@ -73,42 +66,48 @@ def upgrade():
     sa.Column('real_name', sa.String(length=64), nullable=True),
     sa.Column('fifa_name', sa.String(length=64), nullable=True),
     sa.Column('pes_name', sa.String(length=64), nullable=True),
-    sa.ForeignKeyConstraint(['competitions_teams_names_id'], ['competitions.teams_names_id'], nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('teams_types',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('type', sa.String(length=64), nullable=True),
-    sa.ForeignKeyConstraint(['competitions_teams_types_id'], ['competitions.teams_types_id'], nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('videos_games_names',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
-    sa.ForeignKeyConstraint(['competition_videos_games_names_id'], ['competitions.videos_games_names_id'], nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('zones_names',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
     sa.Column('abbreviation', sa.String(length=3), nullable=True),
-    sa.ForeignKeyConstraint(['competition_zones_names_id'], ['competitions.zones_names_id'], nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('abbreviation'),
     sa.UniqueConstraint('name')
     )
     op.create_table('competitions',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('videos_games_names_id', sa.Integer(), nullable=True),
-    sa.Column('seasons_names_id', sa.Integer(), nullable=True),
-    sa.Column('zones_names_id', sa.Integer(), nullable=True),
-    sa.Column('countries_names_id', sa.Integer(), nullable=True),
-    sa.Column('competitions_types_id', sa.Integer(), nullable=True),
-    sa.Column('competitions_categories_id', sa.Integer(), nullable=True),
-    sa.Column('competitions_names_id', sa.Integer(), nullable=True),
-    sa.Column('teams_names_id', sa.Integer(), nullable=True),
-    sa.Column('teams_types_id', sa.Integer(), nullable=True),
-    sa.Column('teams_levels_id', sa.Integer(), nullable=True),
+    sa.Column('videos_games_names_id', sa.Integer(), nullable=False),
+    sa.Column('seasons_names_id', sa.Integer(), nullable=False),
+    sa.Column('zones_names_id', sa.Integer(), nullable=False),
+    sa.Column('countries_names_id', sa.Integer(), nullable=False),
+    sa.Column('competitions_names_id', sa.Integer(), nullable=False),
+    sa.Column('competitions_categories_id', sa.Integer(), nullable=False),
+    sa.Column('competitions_types_id', sa.Integer(), nullable=False),
+    sa.Column('teams_names_id', sa.Integer(), nullable=False),
+    sa.Column('teams_types_id', sa.Integer(), nullable=False),
+    sa.Column('teams_levels_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['competitions_categories_id'], ['competitions_categories.id'], ),
+    sa.ForeignKeyConstraint(['competitions_names_id'], ['competitions_names.id'], ),
+    sa.ForeignKeyConstraint(['competitions_types_id'], ['competitions_types.id'], ),
+    sa.ForeignKeyConstraint(['countries_names_id'], ['countries_names.id'], ),
+    sa.ForeignKeyConstraint(['seasons_names_id'], ['seasons_names.id'], ),
+    sa.ForeignKeyConstraint(['teams_levels_id'], ['teams_levels.id'], ),
+    sa.ForeignKeyConstraint(['teams_names_id'], ['teams_names.id'], ),
+    sa.ForeignKeyConstraint(['teams_types_id'], ['teams_types.id'], ),
+    sa.ForeignKeyConstraint(['videos_games_names_id'], ['videos_games_names.id'], ),
+    sa.ForeignKeyConstraint(['zones_names_id'], ['zones_names.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
@@ -133,4 +132,21 @@ def upgrade():
 
 
 def downgrade():
-    pass
+    # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_index(op.f('ix_users_username'), table_name='users')
+    op.drop_index(op.f('ix_users_email'), table_name='users')
+    op.drop_table('users')
+    op.drop_table('competitions')
+    op.drop_table('zones_names')
+    op.drop_table('videos_games_names')
+    op.drop_table('teams_types')
+    op.drop_table('teams_names')
+    op.drop_table('teams_levels')
+    op.drop_table('seasons_names')
+    op.drop_index(op.f('ix_roles_default'), table_name='roles')
+    op.drop_table('roles')
+    op.drop_table('countries_names')
+    op.drop_table('competitions_types')
+    op.drop_table('competitions_names')
+    op.drop_table('competitions_categories')
+    # ### end Alembic commands ###

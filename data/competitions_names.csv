@@ -1,20 +1,21 @@
-0,Premier League
-1,League Championship
-3,Ligue 1 Conforama
-4,Domino's Ligue 2
-5,Serie A
-6,Serie B
+id,name
+1,"League Championship"
+3,"Ligue 1 Conforama"
+4,"Domino's Ligue 2"
+5,"Serie A"
+6,"Serie B"
 7,Eredivisie
-8,Liga Santander
-9,LIGA ADELANTE
-10,Liga Nos
-12,Série A
-13,Superliga Quilmes Clásica
-14,Primera División
+8,"Liga Santander"
+9,"LIGA ADELANTE"
+10,"Liga Nos"
+12,"Série A"
+13,"Superliga Quilmes Clásica"
+14,"Primera División"
 15,AFC Champions League
-17,coupe du monde
-25,Russian Premier Liga
+17,"coupe du monde"
+25,"Russian Premier Liga"
 26,superliga
-27,Raiffeisen Super League
-28,Ladbrokes Premiership
-29,Jupiler Pro League
+27,"Raiffeisen Super League"
+28,"Ladbrokes Premiership"
+29,"Jupiler Pro League"
+34,"Premier League"

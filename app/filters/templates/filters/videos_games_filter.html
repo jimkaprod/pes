@@ -1,0 +1,14 @@
+<!-- <label for="exampleFormControlSelect2">VideosGames</label>
+<select multiple class="form-control" id="js-teams-selection-filter-videos-games-names" data-model="{{ videosGamesNames['model'] }}">
+  {% for item in videosGamesNames['list'] %}
+    <option data-id="{{ item.id }}" data-name="{{ item.name }}">{{ item.id }} : {{ item.name }}</option>
+  {% endfor %}
+</select>
+ -->
+<div class="col-6" style="overflow-y: auto;">
+  <ul id="js-teams-selection-filter-videos-games-names" data-model="{{ videosGamesNames['model'] }}" class="list-group" style="overflow:scroll; height:400px;">
+    {% for item in videosGamesNames['list'] %}
+      <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="list-group-item list-group-item-action">{{ item.id }} : {{ item.name }}</a>
+    {% endfor %}
+  </div>
+</div>

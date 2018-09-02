@@ -14,6 +14,8 @@
 </div>
 
 <form>
+{% include "filters/videos_games_filter.html" %}
+
   <div class="container-fluid">
 <!--
     <div class="row">
@@ -190,5 +192,6 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/handlebars.min-latest.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('competitions.static', filename='js/competitions.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('filters.static', filename='js/teams_selection_filter.js') }}"></script>
 
 {% endblock %}

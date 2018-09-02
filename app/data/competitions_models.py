@@ -5,16 +5,16 @@ class Competitions(db.Model):
   __tablename__ = 'competitions'
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-  videos_games_names_id = db.Column(db.Integer)
-  seasons_names_id = db.Column(db.Integer)
-  zones_names_id = db.Column(db.Integer)
-  countries_names_id = db.Column(db.Integer)
-  competitions_types_id = db.Column(db.Integer)
-  competitions_categories_id = db.Column(db.Integer)
-  competitions_names_id = db.Column(db.Integer)
-  teams_names_id = db.Column(db.Integer)
-  teams_types_id = db.Column(db.Integer)
-  teams_levels_id = db.Column(db.Integer)
+  videos_games_names_id = db.Column(db.Integer, db.ForeignKey('videos_games_names.id'), nullable=False)
+  seasons_names_id = db.Column(db.Integer, db.ForeignKey('seasons_names.id'), nullable=False)
+  zones_names_id = db.Column(db.Integer, db.ForeignKey('zones_names.id'), nullable=False)
+  countries_names_id = db.Column(db.Integer, db.ForeignKey('countries_names.id'), nullable=False)
+  competitions_names_id = db.Column(db.Integer, db.ForeignKey('competitions_names.id'), nullable=False)
+  competitions_categories_id = db.Column(db.Integer, db.ForeignKey('competitions_categories.id'), nullable=False)
+  competitions_types_id = db.Column(db.Integer, db.ForeignKey('competitions_types.id'), nullable=False)
+  teams_names_id = db.Column(db.Integer, db.ForeignKey('teams_names.id'), nullable=False)
+  teams_types_id = db.Column(db.Integer, db.ForeignKey('teams_types.id'), nullable=False)
+  teams_levels_id = db.Column(db.Integer, db.ForeignKey('teams_levels.id'), nullable=False)
 
 
 class VideosGamesNames(db.Model):
@@ -22,14 +22,14 @@ class VideosGamesNames(db.Model):
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
-  competition_videos_games_names_id = db.Column(db.Integer, db.ForeignKey('competitions.videos_games_names_id'), nullable=False)
+  videos_games_names_id = db.relationship('Competitions', backref='videosGamesNames', lazy=True)
 
 class SeasonsNames(db.Model):
   __tablename__ = 'seasons_names'
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
-  competition_seasons_names_id = db.Column(db.Integer, db.ForeignKey('competitions.seasons_names_id'), nullable=False)
+  seasons_names_id = db.relationship('Competitions', backref='seasonsNames', lazy=True)
 
 class ZonesNames(db.Model):
   __tablename__ = 'zones_names'
@@ -37,7 +37,7 @@ class ZonesNames(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), unique=True)
   abbreviation = db.Column(db.String(3), unique=True)
-  competition_zones_names_id = db.Column(db.Integer, db.ForeignKey('competitions.zones_names_id'), nullable=False)
+  zones_names_id = db.relationship('Competitions', backref='zonesNames', lazy=True)
 
 class CountriesNames(db.Model):
   __tablename__ = 'countries_names'
@@ -45,25 +45,26 @@ class CountriesNames(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), unique=True)
   abbreviation = db.Column(db.String(3), unique=True)
-  competition_countries_names_id = db.Column(db.Integer, db.ForeignKey('competitions.countries_names_id'), nullable=False)
-
-class CompetitionsTypes(db.Model):
-  __tablename__ = 'competitions_types'
-  __table_args__ = {'extend_existing': True}
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(64))
-  competitions_competitions_types_id = db.Column(db.Integer, db.ForeignKey('competitions.competitions_types_id'), nullable=False)
-
-class CompetitionsCategories(db.Model):
-  __tablename__ = 'competitions_categories'
-  __table_args__ = {'extend_existing': True}
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(64))
-  competitions_competitions_categories_id = db.Column(db.Integer, db.ForeignKey('competitions.competitions_categories_id'), nullable=False)
+  countries_names_id = db.relationship('Competitions', backref='countriesNames', lazy=True)
 
 class CompetitionsNames(db.Model):
   __tablename__ = 'competitions_names'
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
-  competitions_competitions_names_id = db.Column(db.Integer, db.ForeignKey('competitions.competitions_names_id'), nullable=False)
+  competitions_names_id = db.relationship('Competitions', backref='competitionsNames', lazy=True)
+
+class CompetitionsCategories(db.Model):
+  __tablename__ = 'competitions_categories'
+  __table_args__ = {'extend_existing': True}
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(64))
+  competitions_categories_id = db.relationship('Competitions', backref='competitionsCategories', lazy=True)
+
+class CompetitionsTypes(db.Model):
+  __tablename__ = 'competitions_types'
+  __table_args__ = {'extend_existing': True}
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(64))
+  competitions_types_id = db.relationship('Competitions', backref='competitionsTypes', lazy=True)
+

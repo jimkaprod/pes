@@ -143,7 +143,7 @@ dataFilters={}
 var event = new Event('build');
 
 //Ecouter l'événement.
-document.addEventListener('build', function (e) { console.log('allo jecoute') }, false);
+document.addEventListener('build', function (e) {  }, false);
 
 //distribuer l'événement.
 document.dispatchEvent(event);
@@ -154,7 +154,7 @@ var eCompetitionsFiltersClick = new Event('onCompetitionsFiltersClick');
 
 document.addEventListener("DOMContentLoaded", function(e) {
   var deleteLinks = document.querySelectorAll('[class^="delete-item"]');
-  console.log('YO',deleteLinks)
+
   for (var i = 0; i < deleteLinks.length; i++) {
     console.log(deleteLinks[i])
     deleteLinks[i].addEventListener('click', function(event) {

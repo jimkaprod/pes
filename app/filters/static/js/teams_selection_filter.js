@@ -81,3 +81,47 @@ function filters() {
 //     }
 //   });
 // });
+
+
+function videosGamesNamesRequest()
+{
+  var request = getXdr();
+  request.open('POST', '/competitions/teams/filters');
+  console.log(dataFilters)
+  jsonData = JSON.stringify(dataFilters);
+  console.log(jsonData )
+  request.responseType = "json";
+  request.send(jsonData);
+
+  request.onerror = function(e) {
+  };
+
+  request.onload = function(e) {
+    if (request.status >= 200 && request.status < 400) {
+      // Success!
+      var response = request.response;
+      data = response.data
+      // container = document.getElementById('results')
+      // container.innerHTML = tpl
+      // source   = document.getElementById("entry-template").innerHTML;
+
+      // pagesVues = data['pagesVues'];
+      // visites = data['visites'];
+      // visiteurs = data['visiteurs'];
+
+      // var template = Handlebars.compile(source);
+      // var context = {data};
+      // var html = template(context);
+
+      // container.innerHTML=html;
+      // container.getElementsByTagName('table')[0].id="id0"
+
+      // for(var i=0; i<data.length; i++){
+      // }
+
+    } else {
+      // We reached our target server, but it returned an error
+      console.log('getUserAuthorisation Server Error');
+    }
+  }
+}

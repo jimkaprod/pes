@@ -14,7 +14,7 @@ from .teams_forms import EditTeamsNamesForm, EditTeamsTypesForm, EditTeamsLevels
 def teams_names_add():
     form = EditTeamsNamesForm()
     if form.validate_on_submit():
-        item = TeamsNames(real_name=form.real_name.data, fifa_name=form.fifa_name.data, pes_name=form.pes_name.data)
+        item = TeamsNames(pes_name=form.pes_name.data, real_name=form.real_name.data)
         db.session.add(item)
         db.session.commit()
         flash('TeamsNames has been added.')
@@ -39,16 +39,14 @@ def teams_names_edit(id):
     fields = TeamsNames.query.get_or_404(id)
     form = EditTeamsNamesForm()
     if form.validate_on_submit():
-        fields.real_name = form.real_name.data
-        fields.fifa_name = form.fifa_name.data
         fields.pes_name = form.pes_name.data
+        fields.real_name = form.real_name.data
         db.session.add(fields)
         db.session.commit()
         flash('TeamsNames has been updated.')
         return redirect(url_for('.teams_names_list', fields=fields))
-    form.real_name.data = fields.real_name
-    form.fifa_name.data = fields.fifa_name
     form.pes_name.data = fields.pes_name
+    form.real_name.data = fields.real_name
     return render_template('data/teams_names_edit.html', form=form, fields=fields)
 ###################
 #TeamsTypes

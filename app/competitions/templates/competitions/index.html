@@ -168,7 +168,7 @@
         <label for="exampleFormControlSelect2">Teams</label>
         <select multiple size="20" class="form-control" id="js-teams-names" data-model="{{ teamsNames['model'] }}">
           {% for item in teamsNames['list'] %}
-            <option data-id="{{ item.id }}" data-real_name="{{ item.real_name }}" data-fifa_name="{{ item.fifa_name }}" data-pes_name="{{ item.pes_name }}">{{ item.id }} : {{ item.real_name }} : {{ item.fifa_name }} : {{ item.pes_name }}</option>
+            <option data-id="{{ item.id }}" data-real_name="{{ item.real_name }}" data-pes_name="{{ item.pes_name }}">{{ item.id }} : {{ item.real_name }} : {{ item.pes_name }}</option>
           {% endfor %}
         </select>
       </div>

@@ -8,7 +8,7 @@
 <div class="page-header">
     <h1>List Competitions</h1>
 </div>
-<a href="{{ url_for('.competitions_add') }}"><span class="label label-primary">Add</span></a>
+<a href="{{ url_for('.tournaments_add') }}"><span class="label label-primary">Add</span></a>
 <ul class="list-group">
 {% for item in list %}
   <li class="list-group-item">
@@ -18,11 +18,11 @@
     <span><span class="badge">{{ item.competitions_names_id }}</span> {{ item.competitions_names_name }}</span> //
     <span><span class="badge">{{ item.competitions_types_id }}</span> {{ item.competitions_types_name }}</span> //
     <span><span class="badge">{{ item.competitions_categories_id }}</span> {{ item.competitions_categories_name }}</span> //
-    <span><span class="badge">{{ item.teams_names_id }}</span> {{ item.teams_names_real_name }} {{ item.teams_names_fifa_name }} {{ item.teams_names_pes_name }}</span> //
+    <span><span class="badge">{{ item.teams_names_id }}</span> {{ item.teams_names_real_name }} {{ item.teams_names_pes_name }}</span> //
     <span><span class="badge">{{ item.teams_types_id }}</span> {{ item.teams_types_type }}</span> //
     <span><span class="badge">{{ item.teams_levels_id }}</span> {{ item.teams_levels_level }}</span> //
-    <a href="{{ url_for('.competitions_edit', id=item.id) }}"><span class="label label-primary">Edit</span></a>
-    <a href="{{ url_for('.competitions_delete', id=item.id) }}" class="delete-item"><span class="label label-primary">Delete</span></a>
+    <a href="{{ url_for('.tournaments_edit', id=item.id) }}"><span class="label label-primary">Edit</span></a>
+    <a href="{{ url_for('.tournaments_delete', id=item.id) }}" class="delete-item"><span class="label label-primary">Delete</span></a>
   </li>
 {% endfor %}
 </ul>

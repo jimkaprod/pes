@@ -7,6 +7,9 @@ from ..decorators import admin_required
 def index():
     return render_template('data/index.html')
 
+@data.route('/general', methods=['GET', 'POST'])
+def general():
+    return render_template('data/general.html')
 
 @data.route('/teams', methods=['GET', 'POST'])
 def teams():

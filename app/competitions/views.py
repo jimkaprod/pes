@@ -3,7 +3,9 @@ from flask_login import login_required, current_user
 from . import competitions
 from ..decorators import admin_required
 from .. import db
-from ..data.competitions_models import VideosGamesNames, CountriesNames, Competitions, CompetitionsNames, CompetitionsTypes, CompetitionsCategories, SeasonsNames, ZonesNames
+from ..data.general_models import VideosGamesNames, SeasonsNames, ZonesNames, CountriesNames
+from ..data.tournament_models import  Tournaments
+from ..data.competitions_models import  CompetitionsNames, CompetitionsTypes, CompetitionsCategories
 from ..data.teams_models import TeamsNames, TeamsTypes, TeamsLevels
 from flask_sqlalchemy import get_debug_queries
 

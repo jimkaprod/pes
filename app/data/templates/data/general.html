@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}La Provence - Dashboard{% endblock %}
+
+{% block page_content %}
+{% include "data/navbar.html" %}
+<div class="page-header">
+<h1>Data - Global</h1>
+</div>
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/handlebars.min-latest.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('competitions.static', filename='js/competitions.js') }}"></script>
+
+{% endblock %}

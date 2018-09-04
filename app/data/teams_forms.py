@@ -8,9 +8,8 @@ from .teams_models import TeamsNames, TeamsTypes, TeamsLevels
 
 
 class EditTeamsNamesForm(FlaskForm):
-  real_name = StringField('Nom de léquipe', validators=[Length(0, 64)])
-  fifa_name = StringField('Nom Fifa', validators=[Length(0, 64)])
   pes_name = StringField('Nom Pes', validators=[Length(0, 64)])
+  real_name = StringField('Nom de léquipe', validators=[Length(0, 64)])
   submit = SubmitField('Valider')
 
 class EditTeamsTypesForm(FlaskForm):

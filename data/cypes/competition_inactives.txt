@@ -1,0 +1,9 @@
+Copa Aguila
+Copa Espagna
+Coupe des confederations
+coupe Turk -> probleme import
+supercoupe Turk -> probleme import
+Supercoupe_Anglais = community shield
+supercupAllemagne = pas les clubs
+SuperLiga Aguila = pas les clubs
+

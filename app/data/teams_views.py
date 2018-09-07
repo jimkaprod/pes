@@ -1,11 +1,12 @@
 from flask import render_template, session, redirect, url_for, current_app, jsonify, json, request, flash
 from flask_login import login_required, current_user
+from sqlalchemy import desc, asc
 from ..decorators import admin_required
 from .. import db
 
 from . import data
-from .teams_models import TeamsNames, TeamsTypes, TeamsLevels
-from .teams_forms import EditTeamsNamesForm, EditTeamsTypesForm, EditTeamsLevelsForm
+from .teams_models import Teams, TeamsNames, TeamsTypes, TeamsLevels
+from .teams_forms import EditTeamsForm, EditTeamsNamesForm, EditTeamsTypesForm, EditTeamsLevelsForm
 
 ###################
 #TeamsNames
@@ -128,3 +129,80 @@ def teams_levels_edit(id):
     form.level.data = fields.level
     return render_template('data/teams_levels_edit.html', form=form, fields=fields)
 
+
+###################
+#Teams
+###################
+@data.route('/teams/teams-add', methods=['GET', 'POST'])
+def teams_add():
+    form = EditTeamsForm()
+
+    form.teamsNames.choices = [(row.id, row.real_name) for row in TeamsNames.query.all()]
+    form.teamsNames.default = "Selectionner"
+
+    form.teamsTypes.choices = [(row.id, row.type) for row in TeamsTypes.query.all()]
+    form.teamsTypes.default = "Selectionner"
+
+    form.teamsLevels.choices = [(row.id, row.level) for row in TeamsLevels.query.all()]
+    form.teamsLevels.default = "Selectionner"
+
+    if form.validate_on_submit():
+        item = Teams(
+            teams_names_id = form.teamsNames.data,
+            teams_types_id = form.teamsTypes.data,
+            teams_levels_id = form.teamsLevels.data
+        )
+        db.session.add(item)
+        db.session.commit()
+        flash('Teams has been added.')
+        return redirect(url_for('.teams_list'))
+    form.process()
+    return render_template('data/teams_edit.html', form=form)
+
+@data.route('/teams/teams-delete/<int:id>', methods=['GET', 'POST'])
+def teams_delete(id):
+    item = Teams.query.get_or_404(id)
+    db.session.delete(item)
+    db.session.commit()
+    flash('Teams has been deleted.')
+    return redirect(url_for('.teams_list'))
+
+@data.route('/teams/teams-list')
+def teams_list():
+    list = Teams.query \
+        .add_columns(Teams.id.label('id')) \
+        .join(TeamsNames, TeamsNames.id==Teams.teams_names_id) \
+        .add_columns(TeamsNames.pes_name.label('pes_name'), TeamsNames.real_name.label('real_name')) \
+        .join(TeamsTypes, TeamsTypes.id==Teams.teams_types_id) \
+        .add_columns(TeamsTypes.type.label('type')) \
+        .join(TeamsLevels, TeamsLevels.id==Teams.teams_levels_id) \
+        .add_columns(TeamsLevels.level.label('level')) \
+        .order_by(asc(Teams.id)).all()
+
+    return render_template('data/teams_list.html', list=list)
+
+@data.route('/teams/teams-edit/<int:id>', methods=['GET', 'POST'])
+def teams_edit(id):
+    fields = Teams.query.get_or_404(id)
+    form = EditTeamsForm()
+
+    form.teamsNames.choices = [(row.id, row.real_name) for row in TeamsNames.query.all()]
+    form.teamsNames.default = fields.teams_names_id
+
+    form.teamsTypes.choices = [(row.id, row.type) for row in TeamsTypes.query.all()]
+    form.teamsTypes.default = fields.teams_types_id
+
+    form.teamsLevels.choices = [(row.id, row.level) for row in TeamsLevels.query.all()]
+    form.teamsLevels.default = fields.teams_levels_id
+
+    if form.validate_on_submit():
+        fields.teams_names_id = form.teamsNames.data
+        fields.teams_types_id = form.teamsTypes.data
+        fields.teams_levels_id = form.teamsLevels.data
+        db.session.add(fields)
+        db.session.commit()
+        flash('Teams has been updated.')
+        return redirect(url_for('.teams_list', fields=fields))
+
+    form.process()
+    return render_template('data/teams_edit.html', form=form, fields=fields)

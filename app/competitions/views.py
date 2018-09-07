@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from . import competitions
 from ..decorators import admin_required
 from .. import db
-from ..data.general_models import VideosGamesNames, SeasonsNames, ZonesNames, CountriesNames
+from ..data.general_models import VideosGames, Seasons, Zones, Countries
 from ..data.tournament_models import  Tournaments
 from ..data.competitions_models import  CompetitionsNames, CompetitionsTypes, CompetitionsCategories
 from ..data.teams_models import TeamsNames, TeamsTypes, TeamsLevels
@@ -11,31 +11,31 @@ from flask_sqlalchemy import get_debug_queries
 
 @competitions.route('/home', methods=['GET', 'POST'])
 def index():
-    videosGamesNames = {}
-    videosGamesNamesList = VideosGamesNames.query.order_by(VideosGamesNames.id).all()
-    videosGamesNames['list'] = videosGamesNamesList
-    videosGamesNames['model'] = 'VideosGamesNames'
+    videosGames = {}
+    videosGamesList = VideosGames.query.order_by(VideosGames.id).all()
+    videosGames['list'] = videosGamesList
+    videosGames['model'] = 'VideosGames'
     # for season in seasonsNames:
     #     print(season.id, season.name)
 
-    seasonsNames = {}
-    seasonsNamesList = SeasonsNames.query.order_by(SeasonsNames.id).all()
-    seasonsNames['list'] = seasonsNamesList
-    seasonsNames['model'] = 'SeasonsNames'
+    seasons = {}
+    seasonsList = Seasons.query.order_by(Seasons.id).all()
+    seasons['list'] = seasonsList
+    seasons['model'] = 'Seasons'
     # for season in seasonsNames:
     #     print(season.id, season.name)
 
-    zonesNames = {}
-    zonesNamesList = ZonesNames.query.order_by(ZonesNames.id).all()
-    zonesNames['list'] = zonesNamesList
-    zonesNames['model'] = 'ZonesNames'
+    zones = {}
+    zonesList = Zones.query.order_by(Zones.id).all()
+    zones['list'] = zonesList
+    zones['model'] = 'Zones'
     # for zone in zonesNames:
     #     print(zone.id, zone.name)
 
-    countriesNames = {}
-    countriesNamesList = CountriesNames.query.order_by(CountriesNames.id).all()
-    countriesNames['list'] = countriesNamesList
-    countriesNames['model'] = 'CountriesNames'
+    countries = {}
+    countriesList = Countries.query.order_by(Countries.id).all()
+    countries['list'] = countriesList
+    countries['model'] = 'Countries'
     # for country in countries:
     #     print(country.id, country.name, country.abbreviation, country.zones_id)
 
@@ -84,10 +84,10 @@ def index():
         competitionsNames=competitionsNames,
         competitionsTypes = competitionsTypes,
         competitionsCategories = competitionsCategories,
-        videosGamesNames = videosGamesNames,
-        seasonsNames = seasonsNames,
-        zonesNames = zonesNames,
-        countriesNames = countriesNames,
+        videosGames = videosGames,
+        seasons = seasons,
+        zones = zones,
+        countries = countries,
         teamsTypes = teamsTypes,
         teamsNames = teamsNames,
         teamsLevels = teamsLevels
@@ -99,14 +99,14 @@ def teamsFilters():
     data = json.loads(request.data)
     # print(data)
     for k,v in data.items():
-        if(k == 'VideosGamesNames'):
-            VideosGamesNamesId = v
-        elif(k == 'SeasonsNames'):
-            SeasonsNamesId = v
-        elif(k == 'ZonesNames'):
-            ZonesNamesId = v
-        elif(k == 'CountriesNames'):
-            CountriesNamesId = v
+        if(k == 'VideosGames'):
+            VideosGamesId = v
+        elif(k == 'Seasons'):
+            SeasonsId = v
+        elif(k == 'Zones'):
+            ZonesId = v
+        elif(k == 'Countries'):
+            CountriesId = v
         elif(k == 'CompetitionsNames'):
             CompetitionsNamesId = v
         elif(k == 'CompetitionsTypes'):
@@ -121,25 +121,25 @@ def teamsFilters():
             TeamsLevelsId = v
         print(k,v)
 
-    if(VideosGamesNamesId == -1):
-        videosGamesNamesFilter = ''
+    if(VideosGamesId == -1):
+        videosGamesFilter = ''
     else:
-        videosGamesNamesFilter = 'VideosGamesNames.id == VideosGamesNamesId'
+        videosGamesFilter = 'VideosGames.id == VideosGamesId'
 
-    if(SeasonsNamesId == -1):
-        seasonsNamesFilter = ''
+    if(SeasonsId == -1):
+        seasonsFilter = ''
     else:
-        seasonsNamesFilter = 'SeasonsNames.id == SeasonsNamesId'
+        seasonsFilter = 'Seasons.id == SeasonsId'
 
-    if(ZonesNamesId == -1):
-        zonesNamesFilter = ''
+    if(ZonesId == -1):
+        zonesFilter = ''
     else:
-        zonesNamesFilter = 'ZonesNames.id == ZonesNamesId'
+        zonesFilter = 'Zones.id == ZonesId'
 
-    if(CountriesNamesId == -1):
-        countriesNamesFilter = ''
+    if(CountriesId == -1):
+        countriesFilter = ''
     else:
-        countriesNamesFilter = 'CountriesNames.id == CountriesNamesId'
+        countriesFilter = 'Countries.id == CountriesId'
 
     if(CompetitionsNamesId == -1):
         competitionsNamesFilter = ''
@@ -184,10 +184,10 @@ def teamsFilters():
     criteria = {}
 
     # If you already have a dict, there are easier ways to get a subset of its keys
-    if VideosGamesNamesId != -1: criteria['videos_games_names_id'] = VideosGamesNamesId
-    if SeasonsNamesId != -1: criteria['seasons_names_id'] = SeasonsNamesId
-    if ZonesNamesId != -1: criteria['zones_names_id'] = ZonesNamesId
-    if CountriesNamesId != -1: criteria['countries_names_id'] = CountriesNamesId
+    if VideosGamesId != -1: criteria['videos_games_id'] = VideosGamesId
+    if SeasonsId != -1: criteria['seasons_id'] = SeasonsId
+    if ZonesId != -1: criteria['zones_id'] = ZonesId
+    if CountriesId != -1: criteria['countries_id'] = CountriesId
     if CompetitionsNamesId != -1: criteria['competitions_names_id'] = CompetitionsNamesId
     if CompetitionsTypesId != -1: criteria['competitions_types_id'] = CompetitionsTypesId
     if CompetitionsCategoriesId != -1: criteria['competitions_categories_id'] = CompetitionsCategoriesId

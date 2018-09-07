@@ -1,11 +1,16 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField, SelectField
-from wtforms.validators import DataRequired, Length, Email, Regexp
+from wtforms.validators import DataRequired, Length, Email, Regexp, NumberRange
 
 from ..roles.models import Role
 from ..users.models import User
-from .teams_models import TeamsNames, TeamsTypes, TeamsLevels
+from .teams_models import Teams, TeamsNames, TeamsTypes, TeamsLevels
 
+class EditTeamsForm(FlaskForm):
+  teamsNames = SelectField('Nom de lequipe', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
+  teamsTypes = SelectField('type dequipe', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
+  teamsLevels = SelectField('niveau de lequipe', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
+  submit = SubmitField('Valider')
 
 class EditTeamsNamesForm(FlaskForm):
   pes_name = StringField('Nom Pes', validators=[Length(0, 64)])

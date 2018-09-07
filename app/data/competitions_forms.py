@@ -9,16 +9,9 @@ from .competitions_models import CompetitionsNames, CompetitionsTypes, Competiti
 
 
 class EditCompetitionsForm(FlaskForm):
-  videosGames = SelectField('Nom du jeu', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
-  season = SelectField('Saison', coerce=int,validators=[validators.optional()])
-  zones = SelectField('Zone', coerce=int,validators=[validators.optional()])
-  countries = SelectField('Pays', coerce=int,validators=[validators.optional()])
-  competitionsTypes = SelectField('Type de compétition', coerce=int,validators=[validators.optional()])
-  competitionsCategories = SelectField('Catégorie de la compétition', coerce=int,validators=[validators.optional()])
-  competitionsNames = SelectField('Nom de la compétition', coerce=int,validators=[validators.optional()])
-  teamsNames = SelectField('Nom de lequipe', coerce=int,validators=[validators.optional()])
-  teamsTypes = SelectField('Type de lequipe', coerce=int,validators=[validators.optional()])
-  teamsLevels = SelectField('Niveau de lequipe', coerce=int,validators=[validators.optional()])
+  competitionsTypes = SelectField('Type de compétition', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
+  competitionsCategories = SelectField('Catégorie de la compétition', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
+  competitionsNames = SelectField('Nom de la compétition', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
   submit = SubmitField('Valider')
 
 class EditCompetitionsCategoriesForm(FlaskForm):

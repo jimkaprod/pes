@@ -1,21 +1,22 @@
 <ul class="nav nav-pills">
-  <li role="presentation" {%- if "/data/general" in request.path %} class="active"{% endif %}><a href="{{ url_for('.videos_games_names_list') }}">General</a></li>
-  <li role="presentation" {%- if "/data/competitions" in request.path %} class="active"{% endif %}><a href="{{ url_for('.competitions_names_list') }}">Compétitions</a></li>
+  <li role="presentation" {%- if "/data/general" in request.path %} class="active"{% endif %}><a href="{{ url_for('.videos_games_list') }}">General</a></li>
+  <li role="presentation" {%- if "/data/competitions" in request.path %} class="active"{% endif %}><a href="{{ url_for('.competitions_list') }}">Compétitions</a></li>
   <li role="presentation" {%- if "/data/teams" in request.path %} class="active"{% endif %}><a href="{{ url_for('.teams') }}">Teams</a></li>
   <li role="presentation" {%- if "/data/tournament" in request.path %} class="active"{% endif %}><a href="{{ url_for('.tournaments_list') }}">Tournaments</a></li>
 </ul>
 {% if "/data/general" in request.path %}
 <div class="container-fluid breadcrumb-wrapper">
     <ol class="breadcrumb " role="navigation">
-        <li><a href="{{ url_for('.videos_games_names_list') }}">Vidéos Games</a></li>
-        <li><a href="{{ url_for('.seasons_names_list') }}">Seasons</a></li>
-        <li><a href="{{ url_for('.zones_names_list') }}">Zones</a></li>
-        <li><a href="{{ url_for('.countries_names_list') }}">Countries</a></li>
+        <li><a href="{{ url_for('.videos_games_list') }}">Vidéos Games</a></li>
+        <li><a href="{{ url_for('.seasons_list') }}">Seasons</a></li>
+        <li><a href="{{ url_for('.zones_list') }}">Zones</a></li>
+        <li><a href="{{ url_for('.countries_list') }}">Countries</a></li>
     </ol>
 </div>
 {% elif "/data/competitions" in request.path %}
 <div class="container-fluid breadcrumb-wrapper">
     <ol class="breadcrumb " role="navigation">
+        <li><a href="{{ url_for('.competitions_list') }}">Competitions</a></li>
         <li><a href="{{ url_for('.competitions_names_list') }}">Competitions Names</a></li>
         <li><a href="{{ url_for('.competitions_categories_list') }}">Competitions Categories</a></li>
         <li><a href="{{ url_for('.competitions_types_list') }}">Compétitions Types</a></li>
@@ -24,6 +25,7 @@
 {% elif "/data/teams" in request.path %}
 <div class="container-fluid breadcrumb-wrapper">
     <ol class="breadcrumb " role="navigation">
+        <li><a href="{{ url_for('.teams_list') }}">Teams</a></li>
         <li><a href="{{ url_for('.teams_names_list') }}">Teams Names</a></li>
         <li><a href="{{ url_for('.teams_types_list') }}">Teams Types</a></li>
         <li><a href="{{ url_for('.teams_levels_list') }}">Teams Levels</a></li>

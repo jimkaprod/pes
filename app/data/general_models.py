@@ -2,32 +2,31 @@ from flask import current_app
 from .. import db
 from .tournament_models import Tournaments
 
-class VideosGamesNames(db.Model):
-  __tablename__ = 'videos_games_names'
+class VideosGames(db.Model):
+  __tablename__ = 'videos_games'
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
-  videos_games_names_id = db.relationship('Tournaments', backref='videosGamesNames', lazy=True)
+  videos_games_id = db.relationship('Tournaments', backref='videosGames', lazy=True)
 
-class SeasonsNames(db.Model):
-  __tablename__ = 'seasons_names'
+class Seasons(db.Model):
+  __tablename__ = 'seasons'
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
-  seasons_names_id = db.relationship('Tournaments', backref='seasonsNames', lazy=True)
 
-class ZonesNames(db.Model):
-  __tablename__ = 'zones_names'
+class Zones(db.Model):
+  __tablename__ = 'zones'
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), unique=True)
   abbreviation = db.Column(db.String(3), unique=True)
-  zones_names_id = db.relationship('Tournaments', backref='zonesNames', lazy=True)
+  zones_id = db.relationship('Tournaments', backref='zones', lazy=True)
 
-class CountriesNames(db.Model):
-  __tablename__ = 'countries_names'
+class Countries(db.Model):
+  __tablename__ = 'countries'
   __table_args__ = {'extend_existing': True}
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), unique=True)
   abbreviation = db.Column(db.String(3), unique=True)
-  countries_names_id = db.relationship('Tournaments', backref='countriesNames', lazy=True)
+  countries_id = db.relationship('Tournaments', backref='countries', lazy=True)

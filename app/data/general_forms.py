@@ -5,22 +5,22 @@ from wtforms import validators
 
 from ..roles.models import Role
 from ..users.models import User
-from .general_models import VideosGamesNames, SeasonsNames, ZonesNames, CountriesNames
+from .general_models import VideosGames, Seasons, Zones, Countries
 
-class EditVideosGamesNamesForm(FlaskForm):
+class EditVideosGamesForm(FlaskForm):
   name = StringField('Nom du jeu vidéo', validators=[Length(0, 64)])
   submit = SubmitField('Valider')
 
-class EditSeasonsNamesForm(FlaskForm):
+class EditSeasonsForm(FlaskForm):
   name = StringField('Nom de la saison', validators=[Length(0, 64)])
   submit = SubmitField('Valider')
 
-class EditZonesNamesForm(FlaskForm):
+class EditZonesForm(FlaskForm):
   name = StringField('Nom de la zone', validators=[Length(0, 64)])
   abbreviation = StringField('Abbreviation de la zone', validators=[Length(0, 3)])
   submit = SubmitField('Valider')
 
-class EditCountriesNamesForm(FlaskForm):
+class EditCountriesForm(FlaskForm):
   name = StringField('Nom du pays', validators=[Length(0, 64)])
   submit = SubmitField('Valider')
 

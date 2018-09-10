@@ -92,8 +92,13 @@ def tournaments_list():
     .join(Countries, Countries.id==Tournaments.countries_id) \
     .add_columns(Countries.id.label('countries_id'), Countries.name.label('countries')) \
     .join(Competitions, Competitions.id==Tournaments.competitions_id) \
+    .add_columns(Competitions.id.label('competitions_id')) \
+    .join(CompetitionsNames, CompetitionsNames.id==Competitions.competitions_id) \
+    .add_columns(CompetitionsNames.name.label('competitions_names')) \
     .join(Teams, Teams.id==Tournaments.teams_id) \
     .add_columns(Teams.id.label('teams_id')) \
+    .join(TeamsNames, TeamsNames.id==Teams.teams_id) \
+    .add_columns(TeamsNames.pes_name.label('teams_pes_names'), TeamsNames.real_name.label('teams_real_names')) \
     .order_by(desc(Tournaments.id)).all()
 
     return render_template('data/tournaments_list.html', list=list)

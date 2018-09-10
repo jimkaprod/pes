@@ -12,15 +12,14 @@
 <ul class="list-group">
 {% for item in list %}
   <li class="list-group-item">
-    <span><span class="badge">{{ item.videos_games_id }}</span> {{ item.videos_games }}</span> //
-    <span><span class="badge">{{ item.seasons_id }}</span> {{ item.seasons }}</span> //
-    <span><span class="badge">{{ item.countries_id }}</span> {{ item.countries }}</span> //
-    <span><span class="badge">{{ item.competitions_names_id }}</span> {{ item.competitions_names_name }}</span> //
-    <span><span class="badge">{{ item.competitions_types_id }}</span> {{ item.competitions_types_name }}</span> //
-    <span><span class="badge">{{ item.competitions_categories_id }}</span> {{ item.competitions_categories_name }}</span> //
-    <span><span class="badge">{{ item.teams_names_id }}</span> {{ item.teams_names_real_name }} {{ item.teams_names_pes_name }}</span> //
-    <span><span class="badge">{{ item.teams_types_id }}</span> {{ item.teams_types_type }}</span> //
-    <span><span class="badge">{{ item.teams_levels_id }}</span> {{ item.teams_levels_level }}</span> //
+    <span><span class="badge">{{ id }}</span></span> //
+    <span><span class="badge">Video Game : {{ item.videos_games_id }}</span> {{ item.videos_games }}</span> //
+    <span><span class="badge">Zone : {{ item.zones_id }}</span> {{ item.zones }}</span> //
+    <span><span class="badge">Country : {{ item.countries_id }}</span> {{ item.countries }}</span> //
+    <span><span class="badge">Competition : {{ item.competition_id }}</span> {{ item.competitions_names }}</span> //
+    <span><span class="badge">Team : {{ item.teams_id }}</span> {{ item.teams_pes_names }} {{ item.teams_real_names }}</span> //
+
+
     <a href="{{ url_for('.tournaments_edit', id=item.id) }}"><span class="label label-primary">Edit</span></a>
     <a href="{{ url_for('.tournaments_delete', id=item.id) }}" class="delete-item"><span class="label label-primary">Delete</span></a>
   </li>

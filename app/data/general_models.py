@@ -21,7 +21,7 @@ class Zones(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), unique=True)
   abbreviation = db.Column(db.String(3), unique=True)
-  zones_id = db.relationship('Tournaments', backref='zones', lazy=True)
+  zones_id = db.relationship('Geolocalisation', backref='zones', lazy=True)
 
 class Countries(db.Model):
   __tablename__ = 'countries'
@@ -29,4 +29,12 @@ class Countries(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), unique=True)
   abbreviation = db.Column(db.String(3), unique=True)
-  countries_id = db.relationship('Tournaments', backref='countries', lazy=True)
+  countries_id = db.relationship('Geolocalisation', backref='countries', lazy=True)
+
+class Geolocalisation(db.Model):
+  __tablename__ = 'geolocalisation'
+  __table_args__ = {'extend_existing': True}
+  id = db.Column(db.Integer, primary_key=True)
+  zones_id = db.Column(db.Integer, db.ForeignKey('zones.id'), nullable=False)
+  countries_id = db.Column(db.Integer, db.ForeignKey('countries.id'), nullable=False)
+  geolocalisation_id = db.relationship('Tournaments', backref='geolocalisation', lazy=True)

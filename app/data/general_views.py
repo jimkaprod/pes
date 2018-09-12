@@ -1,12 +1,12 @@
 from flask import render_template, session, redirect, url_for, current_app, jsonify, json, request, flash
 from flask_login import login_required, current_user
-from sqlalchemy import desc
+from sqlalchemy import desc, asc
 from ..decorators import admin_required
 from .. import db
 
 from . import data
-from .general_models import VideosGames, Seasons, Zones, Countries
-from .general_forms import EditVideosGamesForm, EditSeasonsForm, EditZonesForm, EditCountriesForm
+from .general_models import VideosGames, Seasons, Zones, Countries, Geolocalisation
+from .general_forms import EditVideosGamesForm, EditSeasonsForm, EditZonesForm, EditCountriesForm, EditGeolocalisationForm
 ###################
 #VideosGames
 ###################
@@ -168,3 +168,75 @@ def countries_edit(id):
         return redirect(url_for('.countries_list', fields=fields))
     form.name.data = fields.name
     return render_template('data/countries_edit.html', form=form, fields=fields)
+
+###################
+#Geolocalisation
+###################
+@data.route('/general/geolocalisation-add', methods=['GET', 'POST'])
+def geolocalisation_add():
+    form = EditGeolocalisationForm()
+
+    label = (0, 'Selectionner')
+
+    form.zonesNames.choices = [(row.id, row.name) for row in Zones.query.all()]
+    form.zonesNames.choices.insert(0,label)
+    form.zonesNames.default = "Selectionner"
+
+    form.countriesNames.choices = [(row.id, row.name) for row in Countries.query.all()]
+    form.countriesNames.choices.insert(0,label)
+    form.countriesNames.default = "Selectionner"
+
+    if form.validate_on_submit():
+        item = Geolocalisation(
+            zones_id = form.zonesNames.data,
+            countries_id = form.countriesNames.data
+        )
+        db.session.add(item)
+        db.session.commit()
+        flash('Geolocalisation has been added.')
+        return redirect(url_for('.geolocalisation_list'))
+    form.process()
+    return render_template('data/geolocalisation_edit.html', form=form)
+
+@data.route('/general/geolocalisation-delete/<int:id>', methods=['GET', 'POST'])
+def geolocalisation_delete(id):
+    item = Geolocalisation.query.get_or_404(id)
+    db.session.delete(item)
+    db.session.commit()
+    flash('Geolocalisation has been deleted.')
+    return redirect(url_for('.geolocalisation_list'))
+
+@data.route('/general/geolocalisation-list')
+def geolocalisation_list():
+    list = Geolocalisation.query.all()
+    list = Geolocalisation.query \
+        .add_columns(Geolocalisation.id.label('id')) \
+        .join(Zones, Zones.id==Geolocalisation.zones_id) \
+        .add_columns(Zones.name.label('zones_name')) \
+        .join(Countries, Countries.id==Geolocalisation.countries_id) \
+        .add_columns(Countries.name.label('countries_name')) \
+        .order_by(asc(Geolocalisation.id)).all()
+    return render_template('data/geolocalisation_list.html', list=list)
+
+@data.route('/general/geolocalisation-edit/<int:id>', methods=['GET', 'POST'])
+def geolocalisation_edit(id):
+    fields = Geolocalisation.query.get_or_404(id)
+    form = EditGeolocalisationForm()
+
+    form.zonesNames.choices = [(row.id, row.name) for row in Zones.query.all()]
+    form.zonesNames.default = fields.zones_id
+
+    form.countriesNames.choices = [(row.id, row.name) for row in Countries.query.all()]
+    form.countriesNames.default = fields.countries_id
+
+    if form.validate_on_submit():
+        fields.zones_id = form.zonesNames.data
+        fields.countries_id = form.countriesNames.data
+        db.session.add(fields)
+        db.session.commit()
+        flash('Geolocalisation has been updated.')
+        return redirect(url_for('.geolocalisation_list', fields=fields))
+    form.process()
+    return render_template('data/geolocalisation_edit.html', form=form, fields=fields)
+
+

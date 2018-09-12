@@ -5,7 +5,7 @@ from wtforms import validators
 
 from ..roles.models import Role
 from ..users.models import User
-from .general_models import VideosGames, Seasons, Zones, Countries
+from .general_models import VideosGames, Seasons, Zones, Countries, Geolocalisation
 
 class EditVideosGamesForm(FlaskForm):
   name = StringField('Nom du jeu vidéo', validators=[Length(0, 64)])
@@ -22,5 +22,10 @@ class EditZonesForm(FlaskForm):
 
 class EditCountriesForm(FlaskForm):
   name = StringField('Nom du pays', validators=[Length(0, 64)])
+  submit = SubmitField('Valider')
+
+class EditGeolocalisationForm(FlaskForm):
+  zonesNames = SelectField('Nom de la zone', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
+  countriesNames = SelectField('Nom du pays', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
   submit = SubmitField('Valider')
 

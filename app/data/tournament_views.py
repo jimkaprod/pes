@@ -6,7 +6,7 @@ from .. import db
 
 from . import data
 from .teams_models import Teams
-from .general_models import VideosGames, Zones, Countries
+from .general_models import VideosGames, Zones, Countries, Geolocalisation
 from .competitions_models import Competitions, CompetitionsNames
 from .teams_models import Teams, TeamsNames
 from .tournament_models import Tournaments

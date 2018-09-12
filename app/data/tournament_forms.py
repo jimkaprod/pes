@@ -10,8 +10,7 @@ from .tournament_models import Tournaments
 
 class EditTournamentsForm(FlaskForm):
   videosGames = SelectField('Nom du jeu', coerce=int,validators=[DataRequired(), NumberRange(min=1)])
-  zones = SelectField('Zone', coerce=int,validators=[validators.optional()])
-  countries = SelectField('Pays', coerce=int,validators=[validators.optional()])
+  geolocalisation = SelectField('Geolocalisation', coerce=int,validators=[validators.optional()])
   competitions = SelectField('Compétition', coerce=int,validators=[validators.optional()])
   teams = SelectField('Equipe', coerce=int,validators=[validators.optional()])
   submit = SubmitField('Valider')

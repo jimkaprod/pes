@@ -25,13 +25,20 @@ def tournaments_add():
     form.videosGames.choices.insert(0,label)
     form.videosGames.default = "Selectionner"
 
-    form.zones.choices = [(row.id, row.name) for row in Zones.query.all()]
-    form.zones.choices.insert(0,label)
-    form.zones.default = "Selectionner"
+    geolocalisationChoices = Geolocalisation.query \
+        .add_columns(Geolocalisation.id.label('id')) \
+        .join(Zones, Zones.id==Geolocalisation.zones_id) \
+        .add_columns(Zones.name.label('zones_name')) \
+        .join(Countries, Countries.id==Geolocalisation.countries_id) \
+        .add_columns(Countries.name.label('countries_name')) \
+        .order_by(asc(Geolocalisation.id)).all()
 
-    form.countries.choices = [(row.id, row.name) for row in Countries.query.all()]
-    form.countries.choices.insert(0,label)
-    form.countries.default = "Selectionner"
+    geolocalisationChoices = [(row.id, row.zones_name + ' - ' + row.countries_name) for row in geolocalisationChoices]
+
+    form.geolocalisation.choices = geolocalisationChoices
+    form.geolocalisation.choices.insert(0,label)
+    form.geolocalisation.default = "Selectionner"
+
 
     competitionsChoices = Competitions.query \
         .add_columns(Competitions.id.label('id')) \
@@ -61,8 +68,7 @@ def tournaments_add():
     if form.validate_on_submit():
         item = Tournaments(
             videos_games_id = form.videosGames.data,
-            zones_id = form.zones.data,
-            countries_id = form.countries.data,
+            geolocalisation_id = form.geolocalisation.data,
             competitions_id = form.competitions.data,
             teams_id = form.teams.data
         )
@@ -87,17 +93,19 @@ def tournaments_list():
     .add_columns(Tournaments.id.label('id')) \
     .join(VideosGames, VideosGames.id==Tournaments.videos_games_id) \
     .add_columns(VideosGames.id.label('videos_games_id'), VideosGames.name.label('videos_games')) \
-    .join(Zones, Zones.id==Tournaments.zones_id) \
+    .join(Geolocalisation, Geolocalisation.id==Tournaments.geolocalisation_id) \
+    .add_columns(Geolocalisation.id.label('geolocalisation_id')) \
+    .join(Zones, Zones.id==Geolocalisation.zones_id) \
     .add_columns(Zones.id.label('zones_id'), Zones.name.label('zones')) \
-    .join(Countries, Countries.id==Tournaments.countries_id) \
+    .join(Countries, Countries.id==Geolocalisation.countries_id) \
     .add_columns(Countries.id.label('countries_id'), Countries.name.label('countries')) \
     .join(Competitions, Competitions.id==Tournaments.competitions_id) \
     .add_columns(Competitions.id.label('competitions_id')) \
-    .join(CompetitionsNames, CompetitionsNames.id==Competitions.competitions_id) \
+    .join(CompetitionsNames, CompetitionsNames.id==Competitions.competitions_names_id) \
     .add_columns(CompetitionsNames.name.label('competitions_names')) \
     .join(Teams, Teams.id==Tournaments.teams_id) \
     .add_columns(Teams.id.label('teams_id')) \
-    .join(TeamsNames, TeamsNames.id==Teams.teams_id) \
+    .join(TeamsNames, TeamsNames.id==Teams.teams_names_id) \
     .add_columns(TeamsNames.pes_name.label('teams_pes_names'), TeamsNames.real_name.label('teams_real_names')) \
     .order_by(desc(Tournaments.id)).all()
 
@@ -111,11 +119,18 @@ def tournaments_edit(id):
     form.videosGames.choices = [(row.id, row.name) for row in VideosGames.query.all()]
     form.videosGames.default = fields.videos_games_id
 
-    form.zones.choices = [(row.id, row.name) for row in Zones.query.all()]
-    form.zones.default = fields.zones_id
+    geolocalisationChoices = Geolocalisation.query \
+        .add_columns(Geolocalisation.id.label('id')) \
+        .join(Zones, Zones.id==Geolocalisation.zones_id) \
+        .add_columns(Zones.name.label('zones_name')) \
+        .join(Countries, Countries.id==Geolocalisation.countries_id) \
+        .add_columns(Countries.name.label('countries_name')) \
+        .order_by(asc(Geolocalisation.id)).all()
 
-    form.countries.choices = [(row.id, row.name) for row in Countries.query.all()]
-    form.countries.default = fields.countries_id
+    geolocalisationChoices = [(row.id, row.zones_name + ' - ' + row.countries_name) for row in geolocalisationChoices]
+
+    form.geolocalisation.choices = geolocalisationChoices
+    form.geolocalisation.default = fields.geolocalisation_id
 
     competitionsChoices = Competitions.query \
         .add_columns(Competitions.id.label('id')) \
@@ -141,8 +156,7 @@ def tournaments_edit(id):
 
     if form.validate_on_submit():
         fields.videos_games_id = form.videosGames.data
-        fields.zones_id = form.zones.data
-        fields.countries_id = form.countries.data
+        fields.geolocalisation_id = form.geolocalisation.data
         fields.competitions_id = form.competitions.data
         fields.teams_id = form.teams.data
         db.session.add(fields)

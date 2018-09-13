@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `alembic_version`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `alembic_version` (
   `version_num` varchar(32) NOT NULL,
   PRIMARY KEY (`version_num`)
@@ -44,7 +44,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `competitions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `competitions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `competitions_names_id` int(11) NOT NULL,
@@ -76,7 +76,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `competitions_categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `competitions_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -100,7 +100,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `competitions_names`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `competitions_names` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -124,7 +124,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `competitions_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `competitions_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -148,7 +148,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `countries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -175,7 +175,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `geolocalisation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `geolocalisation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `zones_id` int(11) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE `geolocalisation` (
   KEY `zones_id` (`zones_id`),
   CONSTRAINT `geolocalisation_ibfk_1` FOREIGN KEY (`countries_id`) REFERENCES `countries` (`id`),
   CONSTRAINT `geolocalisation_ibfk_2` FOREIGN KEY (`zones_id`) REFERENCES `zones` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +203,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -231,7 +231,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `seasons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `seasons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -255,7 +255,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `teams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `teams_names_id` int(11) NOT NULL,
@@ -287,7 +287,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teams_levels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `teams_levels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `level` float DEFAULT NULL,
@@ -312,7 +312,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teams_names`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `teams_names` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pes_name` varchar(64) DEFAULT NULL,
@@ -337,7 +337,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teams_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `teams_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(64) DEFAULT NULL,
@@ -361,7 +361,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tournaments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `tournaments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `competitions_id` int(11) NOT NULL,
@@ -395,7 +395,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(64) DEFAULT NULL,
@@ -433,7 +433,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `videos_games`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `videos_games` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -457,7 +457,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `zones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `zones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
